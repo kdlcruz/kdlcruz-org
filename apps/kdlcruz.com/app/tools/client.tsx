@@ -1,19 +1,15 @@
 'use client'
 
-import { Box, Card, CardContent, Chip, Stack, Typography } from '@mui/material'
+import { ExpandMore } from '@mui/icons-material';
+import { Accordion, AccordionDetails, AccordionSummary, Box, Chip, Stack, Typography } from '@mui/material'
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import React, { useState } from 'react'
+import { ToolChip } from '../components/ToolChip';
 
 const techLevel = {
   expert: 'expert',
   experienced: 'experienced',
   amateur: 'amateur'
-} as const
-
-const chipStatus = {
-  expert: 'success',
-  experienced: 'info',
-  amateur: 'warning'
 } as const
 
 type TechLevel = typeof techLevel[keyof typeof techLevel]
@@ -46,31 +42,42 @@ export const Client = ({ myTools }: { myTools: MyTools[]}) => {
 
   return (
     <Box sx={{ background: '#233', padding: '10px', width: '100%', height: '100%' }} textAlign="center">
-      <Typography variant="h4" color="primary" fontWeight="bold">My Tools</Typography>
-      <Typography color="secondary" marginBottom="10px">Tools are used for solved problems.</Typography>
-
-      <Stack direction="row" spacing={1} alignItems="center" justifyContent="center" marginBottom="10px" paddingTop="10px">
-        <Chip onClick={() => onLevelClick(techLevel.expert)} clickable={true} label="Expert" color="success" sx={{ opacity: levels.includes(techLevel.expert) ? 1 : 0.3 }} />
-        <Chip onClick={() => onLevelClick(techLevel.experienced)} clickable={true} label="Experienced" color="info" sx={{ opacity: levels.includes(techLevel.experienced) ? 1 : 0.3 }} />
-        <Chip onClick={() => onLevelClick(techLevel.amateur)} clickable={true} label="Amateur" color="warning" sx={{ opacity: levels.includes(techLevel.amateur) ? 1 : 0.3 }} />
-      </Stack>
-
       <Grid2 container spacing={2}>
-        {myTools.map(tools => (
-          <Grid2 xs={12} sm={6} md={4} key={tools.title}>
-            <Card sx={{ background: '#233', borderWidth: '5px', borderRadius: '10px' }} variant="outlined">
-              <CardContent>
-                <Typography color="primary" variant="h6" fontWeight="bold" marginBottom="10px">
+        <Grid2 sm={4} md={4} sx={{ display: { xs: 'none', sm: 'block' } }}>
+          <Typography variant="h4" color="primary" fontWeight="bold">My Tools</Typography>
+          <Typography color="secondary" marginBottom="10px">Tools are used for solved problems.</Typography>
+
+          <Stack direction="row" spacing={1} alignItems="center" justifyContent="center" marginBottom="10px" paddingTop="10px">
+            <Chip onClick={() => onLevelClick(techLevel.expert)} clickable={true} label="Expert" color="success" sx={{ opacity: levels.includes(techLevel.expert) ? 1 : 0.3 }} />
+            <Chip onClick={() => onLevelClick(techLevel.experienced)} clickable={true} label="Experienced" color="info" sx={{ opacity: levels.includes(techLevel.experienced) ? 1 : 0.3 }} />
+            <Chip onClick={() => onLevelClick(techLevel.amateur)} clickable={true} label="Amateur" color="warning" sx={{ opacity: levels.includes(techLevel.amateur) ? 1 : 0.3 }} />
+          </Stack>
+        </Grid2>
+        <Grid2 xs={12} sm={8} md={8}>
+          {myTools.map((tools, key) => (
+            <Accordion key={tools.title} defaultExpanded={key < 3 ? true : false}>
+              <AccordionSummary
+                expandIcon={<ExpandMore color="secondary" />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+                sx={{ background: '#511' }}
+              >
+                <Typography color="secondary" variant="h6" fontWeight="bold" marginBottom="10px">
                   {tools.title}
                 </Typography>
-                {tools.techs.map(tech => (
-                  <Chip key={tech.name} sx={{ marginRight: '10px', marginBottom: '10px' }} label={tech.name} color={chipStatus[tech.level]} disabled={!levels.includes(tech.level)} />
+              </AccordionSummary>
+              <AccordionDetails sx={{ background: '#222', justifyContent: 'center', alignItems: 'center', padding: '10px', display: 'block' }}>
+                {tools.techs.map((tech) => (
+                  <ToolChip key={tech.name} tech={tech} disabled={!levels.includes(tech.level)} />
                 ))}
-              </CardContent>
-            </Card>
-          </Grid2>
-        ))}
+              </AccordionDetails>
+            </Accordion>
+          ))}
+        </Grid2>
       </Grid2>
+      
+
+      
     </Box>
   );
 }

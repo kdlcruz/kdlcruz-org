@@ -1,5 +1,7 @@
 import { Client } from './client'
-import { getTools } from '../server/tools'
+import { getTools } from '../utils/get-tools'
+
+export const revalidate = 20
 
 export default async function Index() {
   const myTools = await getTools()

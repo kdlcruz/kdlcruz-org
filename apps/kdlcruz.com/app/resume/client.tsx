@@ -3,7 +3,8 @@
 import { Timeline, TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineOppositeContent, TimelineSeparator } from '@mui/lab';
 import { Avatar, Box, Chip, Divider, Stack, Typography } from '@mui/material'
 import React, { useState } from 'react'
-import { Resume, TechLevel, chipStatus, techLevel } from '../server/types';
+import { Resume, TechLevel, techLevel } from '../utils/types';
+import { ToolChip } from '../components/ToolChip';
 
 export const Client = ({ resume }: { resume: Resume[]}) => {
   const [levels, setLevels] = useState([techLevel.amateur, techLevel.experienced, techLevel.expert])
@@ -66,7 +67,7 @@ export const Client = ({ resume }: { resume: Resume[]}) => {
                 <Typography sx={{ display: { xs: 'none', md: 'block' } }} variant="h4" color="primary">{detail.position}</Typography>
                 <Typography color="secondary" sx={{ marginBottom: '10px' }}>{detail.description}</Typography>
 
-                {detail.techs.map(tech => <Chip key={detail.companyName + tech.name} sx={{ marginRight: '10px', marginBottom: '10px' }} size="small" label={tech.name} color={chipStatus[tech.level]} disabled={!levels.includes(tech.level)} />)}
+                {detail.techs.map(tech => <ToolChip key={detail.companyName + tech.name} tech={tech} disabled={!levels.includes(tech.level)} />)}
 
               </TimelineContent>
             </TimelineItem>

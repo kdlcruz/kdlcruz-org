@@ -1,7 +1,7 @@
 'use client'
 
-import { Apps, ArrowBack, AssignmentInd, ContactMail, GitHub, Handyman, Home } from "@mui/icons-material"
-import { AppBar, Avatar, BottomNavigation, BottomNavigationAction, Box, Button, Dialog, Divider, Drawer, IconButton, List, Link, ListItemButton, ListItemIcon, ListItemText, SvgIcon, Toolbar, Typography } from "@mui/material"
+import { Apps, ArrowBack, AssignmentInd, GitHub, Handyman, Home } from "@mui/icons-material"
+import { AppBar, Avatar, BottomNavigation, BottomNavigationAction, Box, Divider, Drawer, IconButton, List, Link, ListItemButton, ListItemIcon, ListItemText, SvgIcon, Toolbar, Typography } from "@mui/material"
 import React, { useState } from "react"
 
 const menuItems = [
@@ -18,10 +18,12 @@ const StackOverflowIcon = () => (
   </SvgIcon>
 )
 
+
+
 const Navbar = () => {
   const [open, setOpen] = useState(false)
 
-  const sideList = () => (
+  const SideList = () => (
     <Box width={250} bgcolor="#511" height="100%" component="div" zIndex={1}>
       <Avatar sx={{ width: 105, height: 105, display: 'block', margin: '0.5rem auto' }} src="../avatar.jpg" />
       <Divider />
@@ -64,7 +66,7 @@ const Navbar = () => {
         </AppBar>
       </Box>
       <Drawer open={open} anchor="right" onClose={() => setOpen(false)}>
-        {sideList()}
+        <SideList />
         <BottomNavigation sx={{ background: '#222', height: '55px', overflow: 'hidden' }}>
           <BottomNavigationAction href="https://github.com/kdlcruz" target="_blank" icon={<GitHub color="secondary"/>} />
           <BottomNavigationAction href="https://stackoverflow.com/users/2148468/kdlcruz" target="_blank" icon={<StackOverflowIcon/>} />

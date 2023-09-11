@@ -1,7 +1,9 @@
+import { getPortfolio } from '../utils/get-porfolio'
 import { Client } from './client'
-import { getPortfolio } from '../server/portfolio'
 
-export default async function Index() {
+export const revalidate = 20
+
+export default async function Page() {
   const projects = await getPortfolio()
   return (
     <Client projects={projects} />

@@ -2,9 +2,10 @@
 
 import { Android, Apple, GitHub, Web } from '@mui/icons-material';
 import { Box, Button, Card, CardActions, CardContent, CardMedia, Chip, Stack, SvgIcon, Typography } from '@mui/material'
-import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
+import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
 import React, { useState } from 'react'
-import { Link, Projects, TechLevel, chipStatus, linkTypes, techLevel } from '../server/types';
+import { Link, Projects, TechLevel, linkTypes, techLevel } from '../utils/types'
+import { ToolChip } from '../components/ToolChip';
 
 const NpmIcon = () => (
   <SvgIcon>
@@ -63,7 +64,7 @@ export const Client = ({ projects }: { projects: Projects[]}) => {
               />
               <CardContent>
                 <Box textAlign="left" alignItems="flex-start">
-                  {project.techs.map(tech => <Chip key={project.name + tech.name} sx={{ marginRight: '10px', marginBottom: '10px' }} size="small" label={tech.name} color={chipStatus[tech.level]} disabled={!levels.includes(tech.level)} />)}
+                  {project.techs.map(tech => <ToolChip key={project.name + tech.name} tech={tech} disabled={!levels.includes(tech.level)} size="small" sx={{ margin: '4px' }}/>)}
                 </Box>
                 <Typography variant="h4" color="primary">{project.name}</Typography>
                 <Typography color="secondary" sx={{ marginBottom: '10px' }} textAlign="left">{project.description}</Typography>

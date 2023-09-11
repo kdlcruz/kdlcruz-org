@@ -21,7 +21,7 @@ export const chipStatus = {
 
 export type TechLevel = typeof techLevel[keyof typeof techLevel]
 
-export type Techs = {
+export type Tech = {
   name: string
   level: TechLevel
 }
@@ -45,13 +45,13 @@ export type Projects = {
   name: string
   cover: string
   description: string
-  techs: Techs[]
+  techs: Tech[]
   links: Link[]
 }
 
 export type MyTools = {
   title: string
-  techs: Techs[]
+  techs: Tech[]
 }
 
 export type Resume = {
@@ -60,7 +60,7 @@ export type Resume = {
   cover: string
   position: string
   description: string
-  techs: Techs[]
+  techs: Tech[]
 }
 
 
