@@ -61,7 +61,7 @@ const Navbar = () => {
             <Typography variant="h6" color="secondary" component="div" sx={{ flexGrow: 1 }}>
               Discover
             </Typography>
-            <Typography color="primary">Contact at kj_delacruz28@yahoo.com</Typography>
+            <Typography color="primary">Contact at me@kdlcruz.com</Typography>
           </Toolbar>
         </AppBar>
       </Box>

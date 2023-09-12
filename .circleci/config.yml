@@ -30,12 +30,17 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - run:
+          name: Build Nx Workspace
+          command: yarn nx build kdlcruz.com --prod
+      - run:
           name: Deploy to Google Cloud
           command: |
             echo $gcloud_credentials > gcloud-key-file.json
             gcloud auth activate-service-account --key-file=gcloud-key-file.json
             gcloud config set project kdlcruz-183808
-            gcloud app deploy app.yaml --quiet
+            cp ~/repo/apps/kdlcruz.com/app.yaml ~/repo/dist/apps/kdlcruz.com/
+            cd ~/repo/dist/apps/kdlcruz.com
+            gcloud app deploy app.yaml --quiet --no-promote --set-env-vars GOOGLE_SERVICE_ACCOUNT_EMAIL=$GOOGLE_SERVICE_ACCOUNT_EMAIL GOOGLE_PRIVATE_KEY=$GOOGLE_PRIVATE_KEY GOOGLE_SPREADSHEET_ID=$GOOGLE_SPREADSHEET_ID
 
 workflows:
   version: 2

@@ -1,7 +1,7 @@
 import { getPortfolio } from '../utils/get-porfolio'
 import { Client } from './client'
 
-export const revalidate = 20
+export const dynamic = "force-dynamic"
 
 export default async function Page() {
   const projects = await getPortfolio()
