@@ -34,7 +34,7 @@ jobs:
           name: Env Setup
           command: |
             cd ~/repo/apps/kdlcruz.com
-            sed -e "s/\$GOOGLE_SERVICE_ACCOUNT_EMAIL/$GOOGLE_SERVICE_ACCOUNT_EMAIL/g" -e "s/\$GOOGLE_PRIVATE_KEY/'$GOOGLE_PRIVATE_KEY'/g" -e "s/\$GOOGLE_SPREADSHEET_ID/$GOOGLE_SPREADSHEET_ID/g" app-template.yaml | tee app.yaml
+            sed -e "s|\$GOOGLE_SERVICE_ACCOUNT_EMAIL|$GOOGLE_SERVICE_ACCOUNT_EMAIL|g" -e "s|\$GOOGLE_PRIVATE_KEY|$GOOGLE_PRIVATE_KEY|g" -e "s|\$GOOGLE_SPREADSHEET_ID|$GOOGLE_SPREADSHEET_ID|g" app-template.yaml | tee app.yaml
       - run:
           name: Copy app.yaml to dist
           command: |
