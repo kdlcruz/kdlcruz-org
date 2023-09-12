@@ -31,14 +31,21 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - run:
+          name: Env Setup
+          command: |
+            sed -e "s/\$GOOGLE_SERVICE_ACCOUNT_EMAIL/$GOOGLE_SERVICE_ACCOUNT_EMAIL/g" -e "s/\$GOOGLE_PRIVATE_KEY/$GOOGLE_PRIVATE_KEY/g" -e "s/\$GOOGLE_SPREADSHEET_ID/$GOOGLE_SPREADSHEET_ID/g" app-template.yaml | tee app.yaml
+      - run:
+          name: Copy app.yaml to dist
+          command: |
+            cp ~/repo/apps/kdlcruz.com/app.yaml ~/repo/dist/apps/kdlcruz.com/
+            cd ~/repo/dist/apps/kdlcruz.com
+      - run:
           name: Deploy to Google Cloud
           command: |
             echo $gcloud_credentials > gcloud-key-file.json
             gcloud auth activate-service-account --key-file=gcloud-key-file.json
             gcloud config set project kdlcruz-183808
-            cp ~/repo/apps/kdlcruz.com/app.yaml ~/repo/dist/apps/kdlcruz.com/
-            cd ~/repo/dist/apps/kdlcruz.com
-            gcloud app deploy app.yaml --quiet --no-promote --set-env-vars=GOOGLE_SERVICE_ACCOUNT_EMAIL="$GOOGLE_SERVICE_ACCOUNT_EMAIL",GOOGLE_PRIVATE_KEY="$GOOGLE_PRIVATE_KEY",GOOGLE_SPREADSHEET_ID="$GOOGLE_SPREADSHEET_ID"
+            gcloud app deploy app.yaml --quiet --no-promote
 
 workflows:
   version: 2

@@ -1,0 +1,11 @@
+env: standard
+runtime: nodejs20
+service: default
+handlers:
+  - url: /.*
+    secure: always
+    script: auto
+env_variables:
+  GOOGLE_SERVICE_ACCOUNT_EMAIL: '$GOOGLE_SERVICE_ACCOUNT_EMAIL'
+  GOOGLE_PRIVATE_KEY: "$GOOGLE_PRIVATE_KEY"
+  GOOGLE_SPREADSHEET_ID: '$GOOGLE_SPREADSHEET_ID'
