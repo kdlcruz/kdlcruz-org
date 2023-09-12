@@ -38,7 +38,7 @@ jobs:
             gcloud config set project kdlcruz-183808
             cp ~/repo/apps/kdlcruz.com/app.yaml ~/repo/dist/apps/kdlcruz.com/
             cd ~/repo/dist/apps/kdlcruz.com
-            gcloud app deploy app.yaml --quiet --no-promote --set-env-vars GOOGLE_SERVICE_ACCOUNT_EMAIL="$GOOGLE_SERVICE_ACCOUNT_EMAIL",GOOGLE_PRIVATE_KEY="$GOOGLE_PRIVATE_KEY",GOOGLE_SPREADSHEET_ID="$GOOGLE_SPREADSHEET_ID"
+            gcloud app deploy app.yaml --quiet --no-promote --set-env-vars=GOOGLE_SERVICE_ACCOUNT_EMAIL="$GOOGLE_SERVICE_ACCOUNT_EMAIL",GOOGLE_PRIVATE_KEY="$GOOGLE_PRIVATE_KEY",GOOGLE_SPREADSHEET_ID="$GOOGLE_SPREADSHEET_ID"
 
 workflows:
   version: 2
