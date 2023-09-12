@@ -20,10 +20,18 @@ jobs:
     docker:
       - image: google/cloud-sdk:latest
     steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: yarn install
+      - run:
+          name: Build Nx Workspace
+          command: yarn nx build kdlcruz.com
+      - run:
+          name: Run Tests
+          command: yarn nx test kdlcruz.com
       - setup_remote_docker:
           docker_layer_caching: true
-      - attach_workspace:
-          at: /workspace
       - run:
           name: Deploy to Google Cloud
           command: |
@@ -37,6 +45,10 @@ workflows:
   build:
     jobs:
       - build
+          filters:
+            branches:
+              ignore:
+                - main
       - deploy:
           requires:
             - build
