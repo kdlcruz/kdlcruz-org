@@ -22,10 +22,13 @@ jobs:
     steps:
       - setup_remote_docker:
           docker_layer_caching: true
+      - attach_workspace:
+          at: /workspace
       - run:
           name: Deploy to Google Cloud
           command: |
-            gcloud auth activate-service-account
+            echo $gcloud_credentials > gcloud-key-file.json
+            gcloud auth activate-service-account --key-file=gcloud-key-file.json
             gcloud config set project kdlcruz-183808
             gcloud app deploy ./dist/apps/kdlcruz.com/app.yaml --quiet
 
