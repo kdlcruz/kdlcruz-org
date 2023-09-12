@@ -21,6 +21,8 @@ jobs:
       - image: google/cloud-sdk:latest
     steps:
       - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
       - run:
           name: Install Dependencies
           command: yarn install
@@ -30,15 +32,13 @@ jobs:
       - run:
           name: Run Tests
           command: yarn nx test kdlcruz.com
-      - setup_remote_docker:
-          docker_layer_caching: true
       - run:
           name: Deploy to Google Cloud
           command: |
             echo $gcloud_credentials > gcloud-key-file.json
             gcloud auth activate-service-account --key-file=gcloud-key-file.json
             gcloud config set project kdlcruz-183808
-            gcloud app deploy ./dist/apps/kdlcruz.com/app.yaml --quiet
+            gcloud app deploy app.yaml --quiet
 
 workflows:
   version: 2

@@ -16,7 +16,10 @@
         "name": "next"
       }
     ],
-    "types": ["jest", "node"]
+    "types": [
+      "jest",
+      "node"
+    ]
   },
   "include": [
     "**/*.ts",
@@ -25,7 +28,8 @@
     "**/*.jsx",
     "../../apps/kdlcruz.com/.next/types/**/*.ts",
     "../../dist/apps/kdlcruz.com/.next/types/**/*.ts",
-    "next-env.d.ts"
+    "next-env.d.ts",
+    "../../dist/apps/kdlcruz.com/build/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",
