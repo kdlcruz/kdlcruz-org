@@ -1,0 +1,23 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:14
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: yarn install
+      - run:
+          name: Build Nx Workspace
+          command: nx build
+      - run:
+          name: Run Tests
+          command: nx test
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build
