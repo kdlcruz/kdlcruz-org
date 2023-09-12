@@ -11,10 +11,10 @@ jobs:
           command: yarn install
       - run:
           name: Build Nx Workspace
-          command: yarn nx build
+          command: yarn nx build kdlcruz.com
       - run:
           name: Run Tests
-          command: yarn nx test
+          command: yarn nx test kdlcruz.com
 
 workflows:
   version: 2
