@@ -2,10 +2,14 @@ version: 2.1
 
 jobs:
   build:
+    working_directory: ~/repo
     docker:
       - image: cimg/node:20.6.0
     steps:
-      - checkout
+      - checkout:
+          path: ~/repo
+      - attach_workspace:
+          at: ~/repo
       - run:
           name: Install Dependencies
           command: yarn install
@@ -17,21 +21,12 @@ jobs:
           command: yarn nx test kdlcruz.com
 
   deploy:
+    working_directory: ~/repo
     docker:
       - image: google/cloud-sdk:latest
     steps:
-      - checkout
       - setup_remote_docker:
           docker_layer_caching: true
-      - run:
-          name: Install Dependencies
-          command: yarn install
-      - run:
-          name: Build Nx Workspace
-          command: yarn nx build kdlcruz.com
-      - run:
-          name: Run Tests
-          command: yarn nx test kdlcruz.com
       - run:
           name: Deploy to Google Cloud
           command: |
@@ -44,12 +39,10 @@ workflows:
   version: 2
   build:
     jobs:
-      - build:
-          filters:
-            branches:
-              ignore:
-                - main
+      - build
       - deploy:
+          requires:
+            - build
           filters:
             branches:
               only:
