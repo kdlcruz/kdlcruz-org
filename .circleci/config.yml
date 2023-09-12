@@ -16,8 +16,28 @@ jobs:
           name: Run Tests
           command: yarn nx test kdlcruz.com
 
+    deploy:
+      docker:
+        - image: google/cloud-sdk:latest
+      steps:
+        - setup_remote_docker:
+            docker_layer_caching: true
+        - run:
+            name: Deploy to Google Cloud
+            command: |
+              gcloud auth activate-service-account
+              gcloud config set project kdlcruz-183808
+              gcloud app deploy ./dist/apps/kdlcruz.com/app.yaml --quiet
+
 workflows:
   version: 2
   build:
     jobs:
       - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - main
