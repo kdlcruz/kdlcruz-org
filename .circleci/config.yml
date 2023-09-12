@@ -30,9 +30,6 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - run:
-          name: Build Nx Workspace
-          command: yarn nx build kdlcruz.com --prod
-      - run:
           name: Deploy to Google Cloud
           command: |
             echo $gcloud_credentials > gcloud-key-file.json
