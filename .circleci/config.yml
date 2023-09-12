@@ -50,8 +50,6 @@ workflows:
               ignore:
                 - main
       - deploy:
-          requires:
-            - build
           filters:
             branches:
               only:
