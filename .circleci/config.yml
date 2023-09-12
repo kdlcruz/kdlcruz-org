@@ -17,11 +17,17 @@ jobs:
       - run:
           name: Run Tests
           command: yarn nx test kdlcruz.com
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - '*' 
 
   deploy:
     docker:
       - image: google/cloud-sdk:latest
     steps:
+      - attach_workspace:
+          at: ~/repo
       - setup_remote_docker:
           docker_layer_caching: true
       - run:
