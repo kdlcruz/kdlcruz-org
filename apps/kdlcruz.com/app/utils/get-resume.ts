@@ -1,21 +1,11 @@
-import { GoogleSpreadsheet } from 'google-spreadsheet'
-import { JWT } from 'google-auth-library'
 import { Resume, ResumeRowData, Tech, techLevel } from './types'
 import { getTools } from './get-tools'
-import { cache } from 'react'
+import { getSheetDoc } from './google-sheet'
 
 export const revalidate = 20
 
-export const getResume = cache(async () => {
-  const serviceAccountAuth = new JWT({
-    email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-    key: process.env.GOOGLE_PRIVATE_KEY,
-    scopes: [
-      'https://www.googleapis.com/auth/spreadsheets',
-    ],
-  })
-  
-  const doc = new GoogleSpreadsheet(process.env?.GOOGLE_SPREADSHEET_ID ?? '', serviceAccountAuth)
+export const getResume = async () => {
+  const doc = getSheetDoc()
 
   const tools = await getTools()
   const allTechs: Tech[] = []
@@ -57,4 +47,4 @@ export const getResume = cache(async () => {
   }
   
   return final
-})
+}

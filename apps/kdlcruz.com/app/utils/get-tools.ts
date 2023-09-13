@@ -1,20 +1,10 @@
-import { GoogleSpreadsheet } from 'google-spreadsheet'
-import { JWT } from 'google-auth-library'
 import { MyTools, NumberToTechLevel, Tech, ToolsRowData, numberToTechLevel, techLevel } from './types'
-import { cache } from 'react'
+import { getSheetDoc } from './google-sheet'
 
 export const revalidate = 20
 
-export const getTools = cache(async () => {
-  const serviceAccountAuth = new JWT({
-    email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-    key: process.env.GOOGLE_PRIVATE_KEY,
-    scopes: [
-      'https://www.googleapis.com/auth/spreadsheets',
-    ],
-  })
-  
-  const doc = new GoogleSpreadsheet(process.env?.GOOGLE_SPREADSHEET_ID ?? '', serviceAccountAuth)
+export const getTools = async () => {
+  const doc = getSheetDoc()
 
   await doc.loadInfo()
   const sheet = doc.sheetsByTitle['Tools']
@@ -40,4 +30,4 @@ export const getTools = cache(async () => {
   }
   
   return final
-})
+}
