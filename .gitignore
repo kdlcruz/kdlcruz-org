@@ -43,3 +43,5 @@ Thumbs.db
 .next
 
 .env
+
+apps/kdlcruz.com/app.yaml

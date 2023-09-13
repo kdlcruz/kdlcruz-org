@@ -1,6 +1,6 @@
 'use client'
 
-import { Apps, ArrowBack, AssignmentInd, GitHub, Handyman, Home } from "@mui/icons-material"
+import { Apps, ArrowBack, AssignmentInd, GitHub, Handyman, Home, Menu } from "@mui/icons-material"
 import { AppBar, Avatar, BottomNavigation, BottomNavigationAction, Box, Divider, Drawer, IconButton, List, Link, ListItemButton, ListItemIcon, ListItemText, SvgIcon, Toolbar, Typography } from "@mui/material"
 import React, { useState } from "react"
 
@@ -56,12 +56,12 @@ const Navbar = () => {
         <AppBar sx={{ position: 'static', background: '#222', margin: 0}}>
           <Toolbar>
             <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }} onClick={() => setOpen(true)}>
-              <ArrowBack color="primary"/>
+              <Menu color="primary"/>
             </IconButton>
-            <Typography variant="h6" color="secondary" component="div" sx={{ flexGrow: 1 }}>
+            <Typography variant="h6" color="secondary" component="div" sx={{ flexGrow: 1, cursor: 'pointer' }} onClick={() => setOpen(true)}>
               Discover
             </Typography>
-            <Typography color="primary">Contact at me@kdlcruz.com</Typography>
+            <Typography color="primary">Contact: me@kdlcruz.com</Typography>
           </Toolbar>
         </AppBar>
       </Box>
