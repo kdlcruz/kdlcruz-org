@@ -38,8 +38,8 @@ export const getPortfolio = async () => {
     const projectLinks: Link[] = []
 
     links.forEach(linkWithType => {
-      const [linkType, link] = linkWithType.split(':')
-      projectLinks.push({ link, linkType })
+      const [linkType, ...link] = linkWithType.split(':')
+      projectLinks.push({ link: [...link].join(':'), linkType })
     })
 
     final.push({

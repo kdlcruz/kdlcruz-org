@@ -2,6 +2,7 @@ import React from 'react'
 import './global.css'
 import Navbar from './partials/NavBar'
 import ThemeRegistry from './ThemeRegistry';
+import Providers from './Providers';
 
 export const metadata = {
   title: 'kdlcruz (Kevin Jay Dela Cruz)',
@@ -16,14 +17,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {/* <ThemeProvider theme={theme}> */}
           <ThemeRegistry>
-            <React.Fragment>
+            <Providers>
               <Navbar />
               {children}
-            </React.Fragment>
+            </Providers>
           </ThemeRegistry>
-        {/* </ThemeProvider> */}
       </body>
     </html>
   );

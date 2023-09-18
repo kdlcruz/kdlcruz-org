@@ -46,7 +46,7 @@ jobs:
             echo $gcloud_credentials > gcloud-key-file.json
             gcloud auth activate-service-account --key-file=gcloud-key-file.json
             gcloud config set project kdlcruz-183808
-            gcloud app deploy app.yaml --quiet --no-promote
+            gcloud app deploy app.yaml --quiet --promote
 
 workflows:
   version: 2

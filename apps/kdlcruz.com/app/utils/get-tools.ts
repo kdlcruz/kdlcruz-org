@@ -1,8 +1,6 @@
 import { MyTools, NumberToTechLevel, Tech, ToolsRowData, numberToTechLevel, techLevel } from './types'
 import { getSheetDoc } from './google-sheet'
 
-export const revalidate = 20
-
 export const getTools = async () => {
   const doc = getSheetDoc()
 

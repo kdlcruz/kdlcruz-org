@@ -2,8 +2,6 @@ import { Resume, ResumeRowData, Tech, techLevel } from './types'
 import { getTools } from './get-tools'
 import { getSheetDoc } from './google-sheet'
 
-export const revalidate = 20
-
 export const getResume = async () => {
   const doc = getSheetDoc()
 
