@@ -7,7 +7,7 @@ import type { Engine, Container } from "tsparticles-engine"
 import { loadFirePreset } from "tsparticles-preset-fire"
 import { loadSnowPreset } from 'tsparticles-preset-snow'
 
-const d = new Date();
+const d = new Date()
 const month = d.getMonth()
 
 export default async function BgParticles() {
